@@ -60,7 +60,7 @@ mlist= []   #여래개의 미사일을 담을 list
 
 pad.blit(bg,(0,0)) #배경화면 그리기
 pad.blit(p,(px,py))
-pygame.display.update()
+
 
 clock = pygame.time.Clock()
 while True:
@@ -74,11 +74,11 @@ while True:
                 ps = -5
             elif event.key == pygame.K_RIGHT:
                 ps = +5
-            elif event.key == pygame.K_SPACE: #미사일 발사
-               
-                mx = px+pw/2-mw/2    #연발시 미사일 위치 초기화
-                my = py -mh
-                mlist.append([mx, my])  #발사할 미사일을 리스트에 추가
+            elif event.key == pygame.K_SPACE:
+                mx = px+pw/2-mw/2
+                my = py - mh
+                mlist.append([mx,my])  
+        
 
         if event.type in [pygame.KEYUP]:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
@@ -89,6 +89,8 @@ while True:
         px =0
     elif px >w-pw:
         px = w-pw
+
+   
 
 
     pad.blit(bg,(0,0))
@@ -101,13 +103,24 @@ while True:
         miss +=1
         rock_init()
 
-        rs += 1
+        rs += 10
         if rs >= 10:
-            rs = 10 
+            rs = 5 
+
+    #미사일 발사하기
+    if len(mlist) != 0:
+        for mis in mlist:
+            mis[1] -= 10
+            if mis[1] < -50:  #미사일이 화면밖으로 나갔을 때 
+                mlist.remove(mis)
+            print(mis)
+
+            pad.blit(m,(mis[0],mis[1]))
 
 
 
-    pad.blit(m,(mx,my)) #미사일 그리기
+
+    
 
 
 
