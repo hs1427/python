@@ -15,6 +15,19 @@ red = (255,0,0)
 pad = pygame.display.set_mode((w,h)) #화면 생성
 pygame.display.set_caption("Shooting Game") #제목 설정
 
+#-----------------------게임오버--------------------
+def gameover():
+    global pad, run
+    write('Game over', 70, 200, red,60)
+    gameover_sound.play()
+    pygame.display.update()
+    run = False
+
+
+
+
+
+
 #---------------------------사운드 로드----------
 
 pygame.mixer.music.load('bgm.wav') #배경음악 가져오기
